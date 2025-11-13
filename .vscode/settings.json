@@ -1,0 +1,12 @@
+{
+	"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit"
+	},
+	"[vue]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"i18n-ally.localesPaths": [
+		"src/languages",
+		"src/views/language"
+	],
+}
