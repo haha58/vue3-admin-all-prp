@@ -18,6 +18,7 @@
 import { onBeforeUnmount, shallowRef, reactive, toRefs } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 
+// 接收父组件的 v-model 值
 const props = defineProps({
 	modelValue: {
 		type: [String],
@@ -25,11 +26,17 @@ const props = defineProps({
 	}
 });
 
+//接收父组件，声明可触发的事件
 const emit = defineEmits(["update:modelValue"]);
 
 // 编辑器实例，必须用 shallowRef
+//如果用ref会对绑定的值进行深度响应式转换（递归将对象的所有属性变成响应式）。
+//但对编辑器实例，通常是复杂的第三方对象，包括大量内部属性和方法，会导致性能开销和潜在问题
 const editorRef = shallowRef();
 
+//ref包裹对象时，对象.value是一个通过reactive转换的响应式对象
+//ref包裹不管是对象还是基本类型，都要通过.value来访问或修改
+//但是reactive可以直接访问。则ref可以通过ref.value重新赋值，但是reactive不支持
 const state = reactive({
 	toolbarConfig: {},
 	editorConfig: {

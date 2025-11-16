@@ -12,7 +12,12 @@
 		</el-row>
 	</div>
 </template>
-
+<!-- <input v-model="htmlValue"/>，表单输入中，实现数据双向绑定，相当于:value='htmlValue' @input="htmlValue=$event.target.value" -->
+<!-- <WangEditor v-model="htmlValue"/>，自定义组件中，相当于:modelValue='htmlValue' update:modelValue="htmlValue"，
+	因此子组件接收为modelValue和update:modelValue'，
+	modelValue则是因为vue3同意用modelValue为默认名称
+-->
+<!-- 自定义v-model的props,v-model:title="parentTitle",则接收为title（自定义props名）和update:title（触发自定义事件） -->
 <script setup name="wangEditor">
 import { ref } from "vue";
 import WangEditor from "@/components/WangEditor/index.vue";

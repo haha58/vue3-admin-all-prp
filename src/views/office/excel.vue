@@ -22,6 +22,7 @@
 		</el-upload>
 	</div>
 </template>
+<!-- :on-change相当于v-bind -->
 <script setup name="excel">
 import { reactive } from "vue";
 import { utils, write, read } from "xlsx";

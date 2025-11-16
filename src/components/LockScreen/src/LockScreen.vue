@@ -32,6 +32,14 @@ const state = reactive({
 	type: "",
 	lockValue: ""
 });
+//为什么要用toRefs包裹state，而不是用state.visible?
+/*
+	1、保持结构后的响应性
+		因为直接解构reactive对象会导致属性失去响应性，即变成了一个普通值。toRefs会将每个属性转变成ref对象，确报解构后属性依旧是响应式
+	2、使用toRefs可以确保子组件接收到额属性也是响应式的，且修改会同步到父组件
+	综上：实际开发中最佳实践：复杂对象用reactive+toRefs
+	理论上，是可以直接在template中直接访问state.visible，因为Vue会自动处理响应性。但是需要解构，使用toRefs包裹，可以确保在子组件中使用时依旧保持响应性。
+*/
 const { visible } = toRefs(state);
 const setVisible = isVisible => {
 	state.visible = isVisible;
@@ -45,6 +53,7 @@ const onCancalBtnClick = () => {
 		return ElMessage.error("密码错误");
 	}
 };
+//defineExpose显示暴露组件内部的属性或方法，使父组件可以通过ref访问这些成员
 defineExpose({
 	setVisible,
 	state
